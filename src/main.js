@@ -6,8 +6,13 @@ import {createTotalPriceTemplate} from './view/price';
 import {createTripNewTemplate} from './view/trip-new';
 import {createTripListItemTemplate} from './view/trip-item';
 import {createTripEditTemplate} from './view/trip-edit';
+import {generateTripPoint} from './mock/trip-point';
 
+const DESTINATION_POINTS_COUNT = 15;
 const TRIP_LIST_ITEM_COUNT = 3;
+
+const destinationPoints = new Array(DESTINATION_POINTS_COUNT).fill().map(generateTripPoint);
+
 const render = (container, template, position) => {
   container.insertAdjacentHTML(position, template);
 };
