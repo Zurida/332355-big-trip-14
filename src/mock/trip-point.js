@@ -67,7 +67,7 @@ const generateOffers = (offerType) => {
       offers: [],
     },
   ];
-  return offers.find((item) => item.type === offerType);
+  return offers.find(({type}) => type === offerType);
 };
 
 
@@ -85,6 +85,13 @@ const getDestinationPoint = () => {
   };
 };
 
+const generateDateTo = () => {
+  const minMinutesGap = 30;
+  const maxMinutesGap = 220;
+  const minutesGap = getRandomValue(minMinutesGap, maxMinutesGap);
+  return dayjs().add(minutesGap, 'minute').toDate();
+};
+
 const generateTripPoint = () => {
   const offerType = generateOfferType();
   return {
@@ -92,9 +99,9 @@ const generateTripPoint = () => {
     type: offerType,
     destination_point: getDestinationPoint(),
     offers: generateOffers(offerType).offers,
-    date_from: dayjs().format('HH:mm'),
-    date_to: dayjs().add(30, 'minute').format('HH:mm'),
-    base_price: '',
+    date_from: dayjs().toDate(),
+    date_to: generateDateTo(),
+    base_price: getRandomValue(15, 220),
     isFavorite: Boolean(getRandomValue(0,2)),
   };
 };

@@ -8,10 +8,9 @@ import {createTripListItemTemplate} from './view/trip-item';
 import {createTripEditTemplate} from './view/trip-edit';
 import {generateTripPoint} from './mock/trip-point';
 
-const DESTINATION_POINTS_COUNT = 15;
-const TRIP_LIST_ITEM_COUNT = 3;
+const TRIP_LIST_ITEM_COUNT = 15;
 
-const destinationPoints = new Array(DESTINATION_POINTS_COUNT).fill().map(generateTripPoint);
+const destinationPointsArr = new Array(TRIP_LIST_ITEM_COUNT).fill().map(generateTripPoint);
 
 const render = (container, template, position) => {
   container.insertAdjacentHTML(position, template);
@@ -44,8 +43,8 @@ render(mainTripEvents, createSortTemplate(), 'beforeEnd');
 const tripList = document.createElement('ul');
 tripList.classList.add('trip-events__list');
 
-for (let i = 0; i < TRIP_LIST_ITEM_COUNT; i++) {
-  render(tripList, createTripListItemTemplate(), 'beforeEnd');
+for (let i = 0; i < destinationPointsArr.length; i++) {
+  render(tripList, createTripListItemTemplate(destinationPointsArr[i]), 'beforeEnd');
 }
 
 mainTripEvents.append(tripList);
