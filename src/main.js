@@ -43,15 +43,15 @@ render(mainTripEvents, createSortTemplate(), 'beforeEnd');
 const tripList = document.createElement('ul');
 tripList.classList.add('trip-events__list');
 
-for (let i = 0; i < destinationPointsArr.length; i++) {
+for (let i = 1; i < destinationPointsArr.length; i++) {
   render(tripList, createTripListItemTemplate(destinationPointsArr[i]), 'beforeEnd');
 }
 
 mainTripEvents.append(tripList);
 
 // New trip
-render(tripList, createTripNewTemplate(), 'afterBegin');
+render(tripList, createTripNewTemplate(destinationPointsArr[0]), 'afterBegin');
 
 // Edit trip
-render(tripList, createTripEditTemplate(), 'afterBegin');
+// render(tripList, createTripEditTemplate(), 'afterBegin');
 

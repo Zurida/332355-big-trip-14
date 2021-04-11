@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 const createTripListItemTemplate = (tripPoint) => {
-  const {date_from, date_to, type, destination_point, base_price, offers, isFavorite} = tripPoint;
+  const {date_from, date_to, offer_type, destination_point, base_price, offers, isFavorite} = tripPoint;
 
   const currentDate = dayjs(date_from).format('MMM DD');
 
@@ -34,9 +34,9 @@ const createTripListItemTemplate = (tripPoint) => {
               <div class="event">
                 <time class="event__date" datetime="2019-03-18">${currentDate}</time>
                 <div class="event__type">
-                  <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
+                  <img class="event__type-icon" width="42" height="42" src="img/icons/${offer_type}.png" alt="Event type icon">
                 </div>
-                <h3 class="event__title">${type} ${destination_point.name}</h3>
+                <h3 class="event__title">${offer_type} ${destination_point.name}</h3>
                 <div class="event__schedule">
                   <p class="event__time">
                     <time class="event__start-time" datetime="2019-03-18T10:30">${dateFromFormatted.format('HH:MM')}</time>

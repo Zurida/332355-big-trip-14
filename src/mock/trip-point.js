@@ -80,7 +80,10 @@ const getDestinationPoint = () => {
     name: cities[getRandomValue(0, cities.length)],
     description: randomDescription,
     pictures: [
-      {src: `http://picsum.photos/248/152?r=${getRandomValue()}`},
+      {
+        src: `http://picsum.photos/248/152?r=${getRandomValue()}`,
+        alt: '',
+      },
     ],
   };
 };
@@ -96,7 +99,7 @@ const generateTripPoint = () => {
   const offerType = generateOfferType();
   return {
     id: 0,
-    type: offerType,
+    offer_type: offerType,
     destination_point: getDestinationPoint(),
     offers: generateOffers(offerType).offers,
     date_from: dayjs().toDate(),
