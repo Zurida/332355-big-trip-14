@@ -14,7 +14,10 @@ const createTripNewTemplate = (event = {}) => {
         },
       ],
     },
-    offers = [],
+    offers = {
+      offers_list: [],
+      type: '',
+    },
   } = event;
 
   const generatePointsDataList = () => {
@@ -37,11 +40,15 @@ const createTripNewTemplate = (event = {}) => {
 
 
   const generateEventOfferSelector = () => {
-    if (!offers.length) return '';
-    return offers.map((offer) => {
+    if (!offers.offers_list.length) {
+      setTimeout(() => {
+        document.querySelector('.event__section--offers').classList.add('visually-hidden');
+      }, 0);
+    }
+    return offers.offers_list.map((offer) => {
       return `<div class="event__offer-selector">
-                        <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" name="event-offer-${offer.name}" checked>
-                        <label class="event__offer-label" for="event-offer-luggage-1">
+                        <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.type}-1" type="checkbox" name="event-offer-${offer.type}">
+                        <label class="event__offer-label" for="event-offer-${offer.type}-1">
                           <span class="event__offer-title">${offer.name}</span>
                           &plus;&euro;&nbsp;
                           <span class="event__offer-price">30</span>
@@ -50,7 +57,12 @@ const createTripNewTemplate = (event = {}) => {
     }).join('');
   };
 
-  const generateDestinationPointImages = () => {
+  const generateDestinationPointDescription = () => {
+    if (!destination_point.description) {
+      setTimeout(() => {
+        document.querySelector('.event__section--destination').classList.add('visually-hidden');
+      }, 0);
+    }
     if (!destination_point.pictures.length) return '';
     return destination_point.pictures.map((picture) => {
       return `<img class="event__photo" src="${picture.src}" alt="${picture.alt}">`;
@@ -118,7 +130,7 @@ const createTripNewTemplate = (event = {}) => {
 
                     <div class="event__photos-container">
                       <div class="event__photos-tape">
-                      ${generateDestinationPointImages()}
+                      ${generateDestinationPointDescription()}
                       </div>
                     </div>
                   </section>

@@ -13,58 +13,58 @@ const generateOffers = (offerType) => {
   const offers = [
     {
       type: 'taxi',
-      offers: [
-        {name: 'Order Uber', price: '20'},
+      offers_list: [
+        {name: 'Order Uber', price: '20', type: 'taxi'},
       ],
     },
     {
       type: 'bus',
-      offers: [],
+      offers_list: [],
     },
     {
       type: 'train',
-      offers: [],
+      offers_list: [],
     },
     {
       type: 'ship',
-      offers: [],
+      offers_list: [],
     },
     {
       type: 'transport',
-      offers: [],
+      offers_list: [],
     },
     {
       type: 'drive',
-      offers: [
-        {name: 'Rent a car', price: '200'},
+      offers_list: [
+        {name: 'Rent a car', price: '200', type: 'rent-car'},
       ],
     },
     {
       type: 'flight',
-      offers: [
-        {name: 'Add luggage', price: '50'},
-        {name: 'Switch to comfort', price: '80'},
-        {name: 'Add meal', price: '15'},
-        {name: 'Choose seats', price: '5'},
-        {name: 'Travel by train', price: '40'},
+      offers_list: [
+        {name: 'Add luggage', price: '50', type: 'luggage'},
+        {name: 'Switch to comfort', price: '80', type: 'comfort'},
+        {name: 'Add meal', price: '15', type: 'meal'},
+        {name: 'Choose seats', price: '5', type: 'seats'},
+        {name: 'Travel by train', price: '40', type: 'travel'},
       ],
     },
     {
       type: 'check-in',
-      offers: [
-        {name: 'Add breakfast', price: '50'},
+      offers_list: [
+        {name: 'Add breakfast', price: '50', type: 'breakfast'},
       ],
     },
     {
       type: 'sightseeing',
-      offers: [
-        {name: 'Book tickets', price: '40'},
-        {name: 'Lunch in city', price: '30'},
+      offers_list: [
+        {name: 'Book tickets', price: '40', type: 'bookTickets'},
+        {name: 'Lunch in city', price: '30', type: 'lunch'},
       ],
     },
     {
       type: 'restaurant',
-      offers: [],
+      offers_list: [],
     },
   ];
   return offers.find(({type}) => type === offerType);
@@ -101,7 +101,7 @@ const generateTripPoint = () => {
     id: 0,
     offer_type: offerType,
     destination_point: getDestinationPoint(),
-    offers: generateOffers(offerType).offers,
+    offers: generateOffers(offerType),
     date_from: dayjs().toDate(),
     date_to: generateDateTo(),
     base_price: getRandomValue(15, 220),

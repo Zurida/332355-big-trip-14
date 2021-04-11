@@ -15,9 +15,9 @@ const createTripListItemTemplate = (tripPoint) => {
   };
 
   const createOfferTemplate = (offers) => {
-    if (!offers) return;
+    if (!offers.offers_list) return;
 
-    return offers.map(({name, price}) => {
+    return offers.offers_list.map(({name, price}) => {
       return `<li class="event__offer">
                     <span class="event__offer-title">${name}</span>
                     &plus;&euro;&nbsp;

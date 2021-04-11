@@ -5,7 +5,6 @@ import {createSortTemplate} from './view/sort';
 import {createTotalPriceTemplate} from './view/price';
 import {createTripNewTemplate} from './view/trip-new';
 import {createTripListItemTemplate} from './view/trip-item';
-import {createTripEditTemplate} from './view/trip-edit';
 import {generateTripPoint} from './mock/trip-point';
 
 const TRIP_LIST_ITEM_COUNT = 15;
@@ -21,11 +20,11 @@ const pageMain = document.querySelector('.page-main');
 const headerControls = document.querySelector('.trip-main__trip-controls');
 
 // Header trip info
-render(headerControls, createInfoTemplate(), 'beforeBegin');
+render(headerControls, createInfoTemplate(destinationPointsArr[0]), 'beforeBegin');
 
 // Trip total price
 const headerTripInfo = headerMain.querySelector('.trip-main__trip-info');
-render(headerTripInfo, createTotalPriceTemplate(), 'beforeEnd');
+render(headerTripInfo, createTotalPriceTemplate(destinationPointsArr[0]), 'beforeEnd');
 
 // Header nav
 const headerNav = headerMain.querySelector('.trip-controls__navigation');
@@ -51,7 +50,4 @@ mainTripEvents.append(tripList);
 
 // New trip
 render(tripList, createTripNewTemplate(destinationPointsArr[0]), 'afterBegin');
-
-// Edit trip
-// render(tripList, createTripEditTemplate(), 'afterBegin');
 
