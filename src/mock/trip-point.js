@@ -108,6 +108,5 @@ const generateTripPoint = () => {
     isFavorite: Boolean(getRandomValue(0,2)),
   };
 };
-console.log(generateTripPoint());
 
 export {generateTripPoint};
