@@ -10,6 +10,7 @@ const createTripNewTemplate = (event) => {
 
   const generatePointsDataList = () => {
     if (!CITIES.length) return '';
+
     return CITIES.map((city) => {
       return `<option value="${city}"></option>`;
     });
