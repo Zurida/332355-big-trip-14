@@ -5,11 +5,9 @@ import {createSortTemplate} from './view/sort';
 import {createTotalPriceTemplate} from './view/price';
 import {createTripNewTemplate} from './view/trip-new';
 import {createTripListItemTemplate} from './view/trip-item';
-import {generateTripPoint} from './mock/trip-point';
+import {generateTripPoint, generatePoints} from './mock/trip-point';
 
-const TRIP_LIST_ITEM_COUNT = 15;
-
-const destinationPointsArr = new Array(TRIP_LIST_ITEM_COUNT).fill().map(generateTripPoint);
+const points = generatePoints(generateTripPoint);
 
 const render = (container, template, position) => {
   container.insertAdjacentHTML(position, template);
@@ -20,11 +18,11 @@ const pageMain = document.querySelector('.page-main');
 const headerControls = document.querySelector('.trip-main__trip-controls');
 
 // Header trip info
-render(headerControls, createInfoTemplate(destinationPointsArr[0]), 'beforeBegin');
+render(headerControls, createInfoTemplate(points[0]), 'beforeBegin');
 
 // Trip total price
 const headerTripInfo = headerMain.querySelector('.trip-main__trip-info');
-render(headerTripInfo, createTotalPriceTemplate(destinationPointsArr[0]), 'beforeEnd');
+render(headerTripInfo, createTotalPriceTemplate(points[0]), 'beforeEnd');
 
 // Header nav
 const headerNav = headerMain.querySelector('.trip-controls__navigation');
@@ -42,12 +40,12 @@ render(mainTripEvents, createSortTemplate(), 'beforeEnd');
 const tripList = document.createElement('ul');
 tripList.classList.add('trip-events__list');
 
-for (let i = 1; i < destinationPointsArr.length; i++) {
-  render(tripList, createTripListItemTemplate(destinationPointsArr[i]), 'beforeEnd');
+for (let i = 1; i < points.length; i++) {
+  render(tripList, createTripListItemTemplate(points[i]), 'beforeEnd');
 }
 
 mainTripEvents.append(tripList);
 
 // New trip
-render(tripList, createTripNewTemplate(destinationPointsArr[0]), 'afterBegin');
+render(tripList, createTripNewTemplate(points[0]), 'afterBegin');
 

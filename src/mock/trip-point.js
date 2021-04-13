@@ -1,47 +1,47 @@
-import dayjs from 'dayjs';
+import {CITIES, EVENT_TYPES} from '../constants';
+import {dateFrom} from '../utils';
 
 const getRandomValue = (min = 0, max = 5) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
 const generateOfferType = () => {
-  const offerTypes = ['taxi', 'bus', 'train', 'ship', 'transport', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
-  return offerTypes[getRandomValue(0, offerTypes.length)];
+  return EVENT_TYPES[getRandomValue(0, EVENT_TYPES.length)];
 };
 
 const generateOffers = (offerType) => {
   const offers = [
     {
       type: 'taxi',
-      offers_list: [
+      offersList: [
         {name: 'Order Uber', price: '20', type: 'taxi'},
       ],
     },
     {
       type: 'bus',
-      offers_list: [],
+      offersList: [],
     },
     {
       type: 'train',
-      offers_list: [],
+      offersList: [],
     },
     {
       type: 'ship',
-      offers_list: [],
+      offersList: [],
     },
     {
       type: 'transport',
-      offers_list: [],
+      offersList: [],
     },
     {
       type: 'drive',
-      offers_list: [
+      offersList: [
         {name: 'Rent a car', price: '200', type: 'rent-car'},
       ],
     },
     {
       type: 'flight',
-      offers_list: [
+      offersList: [
         {name: 'Add luggage', price: '50', type: 'luggage'},
         {name: 'Switch to comfort', price: '80', type: 'comfort'},
         {name: 'Add meal', price: '15', type: 'meal'},
@@ -51,20 +51,20 @@ const generateOffers = (offerType) => {
     },
     {
       type: 'check-in',
-      offers_list: [
+      offersList: [
         {name: 'Add breakfast', price: '50', type: 'breakfast'},
       ],
     },
     {
       type: 'sightseeing',
-      offers_list: [
+      offersList: [
         {name: 'Book tickets', price: '40', type: 'bookTickets'},
         {name: 'Lunch in city', price: '30', type: 'lunch'},
       ],
     },
     {
       type: 'restaurant',
-      offers_list: [],
+      offersList: [],
     },
   ];
   return offers.find(({type}) => type === offerType);
@@ -72,12 +72,11 @@ const generateOffers = (offerType) => {
 
 
 const getDestinationPoint = () => {
-  const cities = ['Amsterdam', 'Tokyo', 'Singapore', 'New-York', 'Hong Kong', 'Osaka', 'Nara'];
   const initialText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.';
   const descriptionArray = initialText.split('. ');
   const randomDescription = descriptionArray.splice(getRandomValue(1, 5), getRandomValue(1, 5)).join('. ');
   return {
-    name: cities[getRandomValue(0, cities.length)],
+    name: CITIES[getRandomValue(0, CITIES.length)],
     description: randomDescription,
     pictures: [
       {
@@ -88,25 +87,30 @@ const getDestinationPoint = () => {
   };
 };
 
-const generateDateTo = () => {
+const generateDateTo = (dateFrom) => {
   const minMinutesGap = 30;
   const maxMinutesGap = 220;
   const minutesGap = getRandomValue(minMinutesGap, maxMinutesGap);
-  return dayjs().add(minutesGap, 'minute').toDate();
+  return dateFrom.add(minutesGap, 'minute');
 };
 
 const generateTripPoint = () => {
   const offerType = generateOfferType();
   return {
     id: 0,
-    offer_type: offerType,
-    destination_point: getDestinationPoint(),
+    offerType: offerType,
+    destinationPoint: getDestinationPoint(),
     offers: generateOffers(offerType),
-    date_from: dayjs().toDate(),
-    date_to: generateDateTo(),
-    base_price: getRandomValue(15, 220),
+    dateFrom: dateFrom().toDate(),
+    dateTo: generateDateTo(dateFrom()),
+    basePrice: getRandomValue(15, 220),
     isFavorite: Boolean(getRandomValue(0,2)),
   };
 };
 
-export {generateTripPoint};
+const generatePoints = (points) => {
+  const TRIP_LIST_ITEM_COUNT = 15;
+  return new Array(TRIP_LIST_ITEM_COUNT).fill().map(points);
+};
+
+export {generateTripPoint, generatePoints};

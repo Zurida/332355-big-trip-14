@@ -1,7 +1,7 @@
 const createTotalPriceTemplate = (event) => {
-  const {base_price} = event;
+  const {basePrice} = event;
   return `<p class="trip-info__cost">
-              Total: &euro;&nbsp;<span class="trip-info__cost-value">${base_price}</span>
+              Total: &euro;&nbsp;<span class="trip-info__cost-value">${basePrice}</span>
             </p>`;
 };
 
