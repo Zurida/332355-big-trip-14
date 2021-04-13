@@ -112,4 +112,4 @@ const generatePoints = (itemsCount) => {
   return new Array(itemsCount).fill().map(generateTripPoint);
 };
 
-export {generateTripPoint, generatePoints};
+export {generatePoints};

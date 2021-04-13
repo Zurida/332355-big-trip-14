@@ -1,5 +1,4 @@
 import {timeFormatted} from '../utils';
-import dayjs from "dayjs";
 
 const createTripListItemTemplate = (tripPoint) => {
   const {dateFrom, dateTo, offerType, destinationPoint, basePrice, offers, isFavorite} = tripPoint;
