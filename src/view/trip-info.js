@@ -1,9 +1,15 @@
-export const createInfoTemplate = () => {
+import {formatDuration} from '../utils';
+
+const createInfoTemplate = (event) => {
+  const {destinationPoint, dateFrom, dateTo} = event;
+
   return `<section class="trip-main__trip-info  trip-info">
             <div class="trip-info__main">
-              <h1 class="trip-info__title">Amsterdam &mdash; Chamonix &mdash; Geneva</h1>
+              <h1 class="trip-info__tit le">${destinationPoint.name}</h1>
 
-              <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;20</p>
+              <p class="trip-info__dates">${formatDuration(dateFrom, dateTo)}</p>
             </div>
           </section>`;
 };
+
+export {createInfoTemplate};
