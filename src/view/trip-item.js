@@ -1,4 +1,5 @@
 import {timeFormatted} from '../utils';
+import dayjs from "dayjs";
 
 const createTripListItemTemplate = (tripPoint) => {
   const {dateFrom, dateTo, offerType, destinationPoint, basePrice, offers, isFavorite} = tripPoint;
@@ -30,9 +31,9 @@ const createTripListItemTemplate = (tripPoint) => {
                 <h3 class="event__title">${offerType} ${destinationPoint.name}</h3>
                 <div class="event__schedule">
                   <p class="event__time">
-                    <time class="event__start-time" datetime="2019-03-18T10:30">${time.dateFromFormatted}</time>
+                    <time class="event__start-time" datetime="${time.dateFromAttribute}">${time.dateFromFormatted}</time>
                     &mdash;
-                    <time class="event__end-time" datetime="2019-03-18T11:00">${time.dateToFormatted}</time>
+                    <time class="event__end-time" datetime="${time.dateToAttribute}">${time.dateToFormatted}</time>
                   </p>
                   <p class="event__duration">${time.timeDifference}</p>
                 </div>

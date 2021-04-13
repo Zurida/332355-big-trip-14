@@ -29,6 +29,8 @@ const timeFormatted = (dateFrom, dateTo) => {
     diffDate: diffDate,
     dateFromFormatted: dayjs(dateFrom).format('HH:MM'),
     dateToFormatted: dayjs(dateTo).format('HH:MM'),
+    dateFromAttribute: dayjs(dateFrom).format('YYYY-MM-DDTHH:mm'),
+    dateToAttribute: dayjs(dateTo).format('YYYY-MM-DDTHH:mm'),
     timeDifference: diffDate.format('DD[D] HH[H] mm[M]'),
   };
 };

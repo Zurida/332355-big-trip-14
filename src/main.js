@@ -5,9 +5,10 @@ import {createSortTemplate} from './view/sort';
 import {createTotalPriceTemplate} from './view/price';
 import {createTripNewTemplate} from './view/trip-new';
 import {createTripListItemTemplate} from './view/trip-item';
-import {generateTripPoint, generatePoints} from './mock/trip-point';
+import {generatePoints} from './mock/trip-point';
 
-const points = generatePoints(generateTripPoint);
+const TRIP_LIST_ITEM_COUNT = 15;
+const points = generatePoints(TRIP_LIST_ITEM_COUNT);
 
 const render = (container, template, position) => {
   container.insertAdjacentHTML(position, template);

@@ -108,9 +108,8 @@ const generateTripPoint = () => {
   };
 };
 
-const generatePoints = (points) => {
-  const TRIP_LIST_ITEM_COUNT = 15;
-  return new Array(TRIP_LIST_ITEM_COUNT).fill().map(points);
+const generatePoints = (itemsCount) => {
+  return new Array(itemsCount).fill().map(generateTripPoint);
 };
 
 export {generateTripPoint, generatePoints};
