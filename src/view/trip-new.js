@@ -1,5 +1,5 @@
 import {CITIES, EVENT_TYPES} from '../constants';
-import {createEmptyEvent} from '../utils';
+import {createElement, createEmptyEvent} from '../utils';
 
 const createTripNewTemplate = (event) => {
   if (!event) {
@@ -131,4 +131,23 @@ const createTripNewTemplate = (event) => {
             </li>`;
 };
 
-export {createTripNewTemplate};
+export default class TripNew {
+  constructor(event = createEmptyEvent()) {
+    this._event = event;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripNewTemplate(this._event);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}

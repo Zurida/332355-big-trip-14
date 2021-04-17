@@ -1,4 +1,4 @@
-import {formatDuration} from '../utils';
+import {createElement, formatDuration} from '../utils';
 
 const createInfoTemplate = (event) => {
   const {destinationPoint, dateFrom, dateTo} = event;
@@ -12,4 +12,25 @@ const createInfoTemplate = (event) => {
           </section>`;
 };
 
-export {createInfoTemplate};
+
+export default class TripInfo {
+  constructor(event) {
+    this._event = event;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createInfoTemplate(this._event);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}
+

@@ -56,4 +56,24 @@ const createEmptyEvent = () => {
   };
 };
 
-export {formatDuration, dateFrom, timeFormatted, createEmptyEvent};
+const renderTemplate = (container, template, position) => {
+  container.insertAdjacentHTML(position, template);
+};
+
+const RenderPosition = {
+  AFTERBEGIN: 'afterbegin',
+  BEFOREEND: 'beforeend',
+};
+
+const renderElement = (container, element, place) => {
+  if (place === RenderPosition.BEFOREEND) container.prepend(element);
+  if (place === RenderPosition.AFTERBEGIN) container.append(element);
+};
+
+const createElement = (template) => {
+  const newElement = document.createElement('div');
+  newElement.innerHTML = template;
+  return newElement.firstChild;
+
+};
+export {formatDuration, dateFrom, timeFormatted, createEmptyEvent, renderTemplate, renderElement, createElement, RenderPosition};
