@@ -72,4 +72,14 @@ const createElement = (template) => {
   return newElement.firstChild;
 
 };
-export {formatDuration, dateFrom, timeFormatted, createEmptyEvent, render, createElement, RenderPosition};
+
+
+export {
+  formatDuration,
+  dateFrom,
+  timeFormatted,
+  createEmptyEvent,
+  render,
+  createElement,
+  RenderPosition
+};

@@ -15,16 +15,24 @@ const points = generatePoints(TRIP_LIST_ITEM_COUNT);
 const headerMain = document.querySelector('.trip-main');
 const pageMain = document.querySelector('.page-main');
 
-
 const renderTripPoint = (tripElement, tripPoint) => {
   const tripComponent = new TripItemView(tripPoint);
   const tripEditComponent = new TripEditView(tripPoint);
 
+  const onKeyboardEsc = function (evt) {
+    if (evt.key === 'Escape') {
+      replaceFormToTripPoint();
+    }
+  };
+
   const replaceTripPointToForm = () => {
     tripElement.replaceChild(tripEditComponent.getElement(), tripComponent.getElement());
+    document.addEventListener('keydown', onKeyboardEsc);
   };
+
   const replaceFormToTripPoint= () => {
     tripElement.replaceChild(tripComponent.getElement(), tripEditComponent.getElement());
+    document.removeEventListener('keydown', onKeyboardEsc);
   };
 
   tripComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', () => {
@@ -35,7 +43,9 @@ const renderTripPoint = (tripElement, tripPoint) => {
     evt.preventDefault();
     replaceFormToTripPoint();
   });
-
+  tripEditComponent.getElement().querySelector('.event__reset-btn').addEventListener('click', () => {
+    replaceFormToTripPoint();
+  });
 
   render(tripElement, tripComponent.getElement(), RenderPosition.BEFOREEND);
 };
