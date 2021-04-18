@@ -3,10 +3,10 @@ import TripInfoView from './view/trip-info';
 import FiltersView from './view/filters';
 import SortView from './view/sort';
 import TotalPriceView from './view/price';
-import TripNewView from './view/trip-new';
+import TripEditView from './view/trip-edit';
 import TripItemView from './view/trip-item';
 import {generatePoints} from './mock/trip-point';
-import {renderTemplate, renderElement, RenderPosition} from './utils';
+import {render, RenderPosition} from './utils';
 
 const TRIP_LIST_ITEM_COUNT = 15;
 const points = generatePoints(TRIP_LIST_ITEM_COUNT);
@@ -15,35 +15,56 @@ const points = generatePoints(TRIP_LIST_ITEM_COUNT);
 const headerMain = document.querySelector('.trip-main');
 const pageMain = document.querySelector('.page-main');
 
+
+const renderTripPoint = (tripElement, tripPoint) => {
+  const tripComponent = new TripItemView(tripPoint);
+  const tripEditComponent = new TripEditView(tripPoint);
+
+  const replaceTripPointToForm = () => {
+    tripElement.replaceChild(tripEditComponent.getElement(), tripComponent.getElement());
+  };
+  const replaceFormToTripPoint= () => {
+    tripElement.replaceChild(tripComponent.getElement(), tripEditComponent.getElement());
+  };
+
+  tripComponent.getElement().querySelector('.event__rollup-btn').addEventListener('click', () => {
+    replaceTripPointToForm();
+  });
+
+  tripEditComponent.getElement().querySelector('.event--edit').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    replaceFormToTripPoint();
+  });
+
+
+  render(tripElement, tripComponent.getElement(), RenderPosition.BEFOREEND);
+};
+
 // Header trip info
-renderElement(headerMain, new TripInfoView(points[0]).getElement(), RenderPosition.BEFOREEND);
+render(headerMain, new TripInfoView(points[0]).getElement(), RenderPosition.BEFOREEND);
 
 // Trip total price
 const headerTripInfo = headerMain.querySelector('.trip-main__trip-info');
-renderElement(headerTripInfo, new TotalPriceView(points[0]).getElement(), RenderPosition.AFTERBEGIN);
+render(headerTripInfo, new TotalPriceView(points[0]).getElement(), RenderPosition.AFTERBEGIN);
 
 // Header nav
 const headerNav = headerMain.querySelector('.trip-controls__navigation');
-renderElement(headerNav, new MenuView().getElement(), RenderPosition.BEFOREEND);
+render(headerNav, new MenuView().getElement(), RenderPosition.BEFOREEND);
 
 // Header filters
 const headerFilters = headerMain.querySelector('.trip-controls__filters');
-renderElement(headerFilters, new FiltersView().getElement(), RenderPosition.BEFOREEND);
+render(headerFilters, new FiltersView().getElement(), RenderPosition.BEFOREEND);
 
 // Content sort
 const mainTripEvents = pageMain.querySelector('.trip-events');
-renderElement(mainTripEvents, new SortView().getElement(), RenderPosition.BEFOREEND);
+render(mainTripEvents, new SortView().getElement(), RenderPosition.BEFOREEND);
 
 // Trip list
 const tripList = document.createElement('ul');
 tripList.classList.add('trip-events__list');
 
 for (let i = 1; i < points.length; i++) {
-  renderElement(tripList, new TripItemView(points[i]).getElement(), RenderPosition.BEFOREEND);
+  renderTripPoint(tripList, points[i]);
 }
 
 mainTripEvents.append(tripList);
-
-// New trip
-renderElement(tripList, new TripNewView(points[0]).getElement(), RenderPosition.BEFOREEND);
-

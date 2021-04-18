@@ -56,16 +56,12 @@ const createEmptyEvent = () => {
   };
 };
 
-const renderTemplate = (container, template, position) => {
-  container.insertAdjacentHTML(position, template);
-};
-
 const RenderPosition = {
   AFTERBEGIN: 'afterbegin',
   BEFOREEND: 'beforeend',
 };
 
-const renderElement = (container, element, place) => {
+const render = (container, element, place) => {
   if (place === RenderPosition.BEFOREEND) container.prepend(element);
   if (place === RenderPosition.AFTERBEGIN) container.append(element);
 };
@@ -76,4 +72,4 @@ const createElement = (template) => {
   return newElement.firstChild;
 
 };
-export {formatDuration, dateFrom, timeFormatted, createEmptyEvent, renderTemplate, renderElement, createElement, RenderPosition};
+export {formatDuration, dateFrom, timeFormatted, createEmptyEvent, render, createElement, RenderPosition};

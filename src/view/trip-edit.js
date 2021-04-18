@@ -131,7 +131,7 @@ const createTripNewTemplate = (event) => {
             </li>`;
 };
 
-export default class TripNew {
+export default class TripEdit {
   constructor(event = createEmptyEvent()) {
     this._event = event;
     this._element = null;
