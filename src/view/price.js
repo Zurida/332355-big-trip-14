@@ -1,3 +1,5 @@
+import {createElement} from '../utils';
+
 const createTotalPriceTemplate = (event) => {
   const {basePrice} = event;
   return `<p class="trip-info__cost">
@@ -5,4 +7,24 @@ const createTotalPriceTemplate = (event) => {
             </p>`;
 };
 
-export {createTotalPriceTemplate};
+export default class Price {
+  constructor(event) {
+    this._event = event;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTotalPriceTemplate(this._event);
+  }
+
+  getElement() {
+
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}

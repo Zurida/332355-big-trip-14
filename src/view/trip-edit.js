@@ -1,5 +1,5 @@
 import {CITIES, EVENT_TYPES} from '../constants';
-import {createEmptyEvent} from '../utils';
+import {createElement, createEmptyEvent} from '../utils';
 
 const createTripNewTemplate = (event) => {
   if (!event) {
@@ -98,7 +98,7 @@ const createTripNewTemplate = (event) => {
                     <label class="event__label  event__type-output" for="event-destination-1">
                       ${offerType}
                     </label>
-                    <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="" list="destination-list-1">
+                    <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${event.destinationPoint.name}" list="destination-list-1">
                     <datalist id="destination-list-1">
                       ${generatePointsDataList()}
                     </datalist>
@@ -131,4 +131,23 @@ const createTripNewTemplate = (event) => {
             </li>`;
 };
 
-export {createTripNewTemplate};
+export default class TripEdit {
+  constructor(event = createEmptyEvent()) {
+    this._event = event;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripNewTemplate(this._event);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}

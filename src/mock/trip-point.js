@@ -104,7 +104,7 @@ const generateTripPoint = () => {
     dateFrom: dateFrom().toDate(),
     dateTo: generateDateTo(dateFrom()),
     basePrice: getRandomValue(15, 220),
-    isFavorite: Boolean(getRandomValue(0,2)),
+    isFavorite: Math.random() > 0.5,
   };
 };
 
