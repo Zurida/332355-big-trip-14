@@ -1,4 +1,5 @@
-import {createElement, formatDuration} from '../utils';
+import {formatDuration} from '../utils';
+import AbstractView from './abstract';
 
 const createInfoTemplate = (event) => {
   const {destinationPoint, dateFrom, dateTo} = event;
@@ -13,24 +14,14 @@ const createInfoTemplate = (event) => {
 };
 
 
-export default class TripInfo {
+export default class TripInfo extends AbstractView{
   constructor(event) {
+    super();
     this._event = event;
-    this._element = null;
   }
 
   getTemplate() {
     return createInfoTemplate(this._event);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 }
 

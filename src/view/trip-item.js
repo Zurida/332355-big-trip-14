@@ -1,4 +1,5 @@
-import {timeFormatted, createElement} from '../utils';
+import {timeFormatted} from '../utils';
+import AbstractView from './abstract';
 
 const createTripListItemTemplate = (tripPoint) => {
   const {dateFrom, dateTo, offerType, destinationPoint, basePrice, offers, isFavorite} = tripPoint;
@@ -56,23 +57,13 @@ const createTripListItemTemplate = (tripPoint) => {
             </li>`;
 };
 
-export default class Filters {
+export default class Filters extends AbstractView {
   constructor(tripPoint) {
+    super();
     this._tripPoint = tripPoint;
-    this._element = null;
   }
 
   getTemplate() {
     return createTripListItemTemplate(this._tripPoint);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 }

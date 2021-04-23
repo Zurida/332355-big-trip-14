@@ -1,5 +1,6 @@
 import {CITIES, EVENT_TYPES} from '../constants';
-import {createElement, createEmptyEvent} from '../utils';
+import {createEmptyEvent} from '../utils';
+import AbstractView from './abstract';
 
 const createTripNewTemplate = (event) => {
   if (!event) {
@@ -131,23 +132,13 @@ const createTripNewTemplate = (event) => {
             </li>`;
 };
 
-export default class TripEdit {
+export default class TripEdit extends AbstractView{
   constructor(event = createEmptyEvent()) {
+    super();
     this._event = event;
-    this._element = null;
   }
 
   getTemplate() {
     return createTripNewTemplate(this._event);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 }
