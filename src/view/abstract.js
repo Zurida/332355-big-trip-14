@@ -1,4 +1,4 @@
-import {createElement} from '../utils';
+import {createElement} from '../utils/trip';
 
 export default class Abstract {
   constructor() {
@@ -6,6 +6,7 @@ export default class Abstract {
       throw new Error('Cannot instantiate Abstract, only concrete one.');
     }
     this._element = null;
+    this._callback = {};
   }
 
   getTemplate() {

@@ -1,4 +1,4 @@
-import {timeFormatted} from '../utils';
+import {timeFormatted} from '../utils/date';
 import AbstractView from './abstract';
 
 const createTripListItemTemplate = (tripPoint) => {
@@ -61,9 +61,20 @@ export default class Filters extends AbstractView {
   constructor(tripPoint) {
     super();
     this._tripPoint = tripPoint;
+    this._editClickHandler = this._editClickHandler.bind(this);
   }
 
   getTemplate() {
     return createTripListItemTemplate(this._tripPoint);
+  }
+
+  _editClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.editClick();
+  }
+
+  setEditClickHandler(callback) {
+    this._callback.editClick = callback;
+    this.getElement().addEventListener('click', this._editClickHandler);
   }
 }

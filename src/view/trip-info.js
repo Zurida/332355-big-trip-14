@@ -1,4 +1,4 @@
-import {formatDuration} from '../utils';
+import {formatDuration} from '../utils/date';
 import AbstractView from './abstract';
 
 const createInfoTemplate = (event) => {
