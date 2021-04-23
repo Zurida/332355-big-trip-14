@@ -1,9 +1,7 @@
 import {CITIES, EVENT_TYPES} from '../constants';
-import {dateFrom} from '../utils';
+import {dateFrom} from '../utils/date';
+import {getRandomValue} from '../utils/common';
 
-const getRandomValue = (min = 0, max = 5) => {
-  return Math.floor(Math.random() * (max - min) + min);
-};
 
 const generateOfferType = () => {
   return EVENT_TYPES[getRandomValue(0, EVENT_TYPES.length)];

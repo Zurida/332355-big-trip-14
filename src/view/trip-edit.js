@@ -1,5 +1,6 @@
 import {CITIES, EVENT_TYPES} from '../constants';
-import {createElement, createEmptyEvent} from '../utils';
+import {createEmptyEvent} from '../utils/trip';
+import AbstractView from './abstract';
 
 const createTripNewTemplate = (event) => {
   if (!event) {
@@ -131,23 +132,35 @@ const createTripNewTemplate = (event) => {
             </li>`;
 };
 
-export default class TripEdit {
+export default class TripEdit extends AbstractView{
   constructor(event = createEmptyEvent()) {
+    super();
     this._event = event;
-    this._element = null;
+    this._formSubmitHandler = this._formSubmitHandler.bind(this);
+    this._cancelClickHandler = this._cancelClickHandler.bind(this);
   }
 
   getTemplate() {
     return createTripNewTemplate(this._event);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
+  _formSubmitHandler(evt) {
+    evt.preventDefault();
+    this._callback.formSubmit();
   }
-  removeElement() {
-    this._element = null;
+
+  _cancelClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.cancelClick();
+  }
+
+  setFormSubmitHandler(callback) {
+    this._callback.formSubmit = callback;
+    this.getElement().querySelector('.event--edit').addEventListener('submit', this._formSubmitHandler);
+  }
+
+  setCancelClickHandler(callback) {
+    this._callback.cancelClick = callback;
+    this.getElement().querySelector('.event__reset-btn').addEventListener('click', this._cancelClickHandler);
   }
 }
